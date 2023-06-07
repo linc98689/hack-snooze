@@ -224,7 +224,11 @@ async function btnUpdateUserClick(){
   $storiesLoadingMsg.hide();
 
   storyList.stories = removeStoriesFrom_storyArr(storyList.stories, storyIdList_delete);
+
   currentUser.ownStories = removeStoriesFrom_storyArr(currentUser.ownStories, storyIdList_delete);
+  
+  currentUser.favorites = removeStoriesFrom_storyArr(currentUser.favorites, storyIdList_delete);
+  
   storyIdList_delete = [];
 }
 
