@@ -6,10 +6,10 @@
 
 /** Show main list of all stories when click site name */
 
-function navAllStories(evt) {
+async function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
-  putStoriesOnPage();
+  await putStoriesOnPage();
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -30,7 +30,14 @@ async function navAddStoryClick(evt){
       let title = $("#story-title").val();
       let author = $("#story-author").val();
       let url = $("#story-url").val();
+
+      $storiesLoadingMsg.show();
       await postStoryAndShow({title, author, url});
+      $storiesLoadingMsg.hide();
+      
+      $("#story-title").val("");
+      $("#story-author").val("");
+      $("#story-url").val("");
 }
 
 $navAddStory.on('click', navAddStoryClick);
@@ -41,7 +48,23 @@ function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
   $(".main-nav-links").show();
   $navLogin.hide();
+  $navAddStory.hide();
   $navLogOut.show();
-  $navAddStory.show();
+  $navFavorites.show();
+  $navUserStories.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+// when click on favorites, show currentUser's favorites
+function navFavoritesClick(evt){
+  hidePageComponents();
+  putFavoritesOnPage();
+}
+$navFavorites.on('click', navFavoritesClick);
+
+// when click on my story, show currentUser's own stories and add story form
+function navUserStoriesClick(evt){
+  hidePageComponents();
+  putUserStoriesOnPage();
+}
+$navUserStories.on("click", navUserStoriesClick);

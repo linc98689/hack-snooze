@@ -37,17 +37,40 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+  <div>
+    <a class="hidden nav-link" id="nav-favorites" href="#"> Favorites </a>
+    <a class="hidden nav-link" id="nav-user-stories" href="#"> My Stories </a>
+    <a class="hidden nav-link" id="nav-addStory" href="#"> Submit </a>
+  </div>
   <div class="nav-right">
-    <a class="hidden" id="nav-addStory" href="#"> submit </a>
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
 
-<!-- form for creating a new story -->
-   <!-- hsap -->
-   <form action="#" id="addStory-form" class="addStory-form hidden" method="post">
+<!-- area for stories (all stories, create story, user stories, favorites) -->
+<section class="stories-container container">
+
+  <!-- loading message (removed by JS after stories loaded) -->
+  <div id="stories-loading-msg">Loading&hellip;</div>
+
+  <!-- List of all stories BEFORE login -->
+  <ol id="nologin-all-stories-list" ></ol>
+
+  <!-- List of all stories: AFTER login -->
+  <div id="all-head" class="list-head-container hidden">
+    <div>
+      <h4 class="">Story List</h4>
+      <div class="subtitle">Favor or Disfavor Stories</div>
+    </div>
+    <div><button id="btn-update-favorite" class="update-btn">Save Updates</button></div>
+  </div>
+
+  <ol id="all-stories-list" class="stories-list top-0"></ol>
+  
+  <!-- form for creating a new story -->
+  <form action="#" id="addStory-form" class="addStory-form hidden" method="post">
     <h4>Add a story</h4>
     <div class="login-input">
       <label for="story-title">title</label>
@@ -63,26 +86,16 @@
     </div>
   </form>
 
-<!-- area for stories (all stories, user stories, favorites) -->
-<section class="stories-container container">
-
-  <!-- loading message (removed by JS after stories loaded) -->
-  <div id="stories-loading-msg">Loading&hellip;</div>
-
-  <!-- List of all stories -->
-  <div class="list-head-container">
-    <div>
-      <h4 class="">Story List</h4>
-      <div class="subtitle">Add stories to your favorites</div>
-   </div>
-  <div><button id="btn-update-favorite" class="update-btn">Update Favoriates</button></div>
-</div>
-
-  <ol id="all-stories-list" class="stories-list top-0"></ol>
-
   <!-- List of user stories -->
+  <div id="user-head" class="list-head-container hidden">
+    <div>
+      <h4 class="">My Stories</h4>
+    </div>
+    <div><button id="btn-update-user" class="update-btn">Save Updates</button></div>
+  </div>
   <ol id="user-stories-list" class="stories-list"></ol>
 
+  
   <!-- List of favorites -->
   <ol id="favorites-list" class="stories-list"></ol>
 

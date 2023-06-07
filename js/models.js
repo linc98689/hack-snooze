@@ -74,7 +74,7 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( user, newStory ) {//hsap
+  async addStory( user, newStory ) {
      try{
          let url = BASE_URL + "/stories";
          let data = {

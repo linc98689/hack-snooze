@@ -59,8 +59,15 @@ h4 ~ p{
 button.story-unfavorite:hover{
   background-color: rgb(245, 225, 225);
 }
+
 button.story-favorite:hover{
   outline:1px solid rgb(140, 140, 137)
+}
+
+button.story-delete:hover{
+  background-color: rgb(245, 225, 225);
+  outline:1px solid chocolate;
+  outline-offset: -1px;
 }
 
 ol.top-0{
@@ -69,10 +76,11 @@ ol.top-0{
 }
 
 .subtitle{
-  font-size: 1em;
+  font-size: .85em;
+  font-weight: bold;
   margin-top:5px;
   margin-bottom:0;
-  color:rgb(124, 44, 4)
+  color:rgb(198, 51, 7)
 
 }
 /* Forms */
@@ -136,6 +144,15 @@ form > hr {
   width: 70px;
 }
 
+.update-btn:hover{
+  opacity:0.8;
+  outline:2px solid rgb(133, 4, 4);
+  outline: -4px;
+  border-radius:3px;
+}
+.update-btn{
+  padding:5px 8px;
+}
 /* responsive queries for tightening things up for mobile. */
 
 @media screen and (max-width: 576px) {

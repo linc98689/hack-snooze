@@ -44,6 +44,12 @@
 .story-unfavorite{
   color:rgb(135, 132, 132);
 }
+.story-delete{
+  color:rgb(4, 5, 5);
+}
+.story-noshow{
+  opacity: 0;
+}
 .list-head-container{
   display:flex;
   justify-content: space-between;

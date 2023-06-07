@@ -24,6 +24,7 @@ async function login(evt) {
   $loginForm.trigger("reset");
 
   saveUserCredentialsInLocalStorage();
+
   updateUIOnUserLogin();
 }
 
@@ -109,13 +110,11 @@ function saveUserCredentialsInLocalStorage() {
 
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
+
   hidePageComponents();
-  $allStoriesList.show();
-  $addStoryForm.show(); //hsap
+  putStoriesOnPage(); 
 
   updateNavOnLogin();
-  //hsap
-  favoriteList = currentUser.favoriteList;
 }
 
 /** add a story to favorite of currentUser 
@@ -131,7 +130,8 @@ async function addStoryToFavorites(storyId){
       method:"POST",
       data,
     })
-    currentUser.favorites = res.data.user.favorites;
+    currentUser.favorites = res.data.user.favorites.map(e=>new Story(e));
+    console.log(currentUser.favorites);
     return 0;// success
   }
   catch(err){
@@ -153,12 +153,34 @@ async function removeStoryFromFavorites(storyId){
       data,
     })
     console.log(res);
-    currentUser.favorites = res.data.user.favorites;
+    currentUser.favorites = res.data.user.favorites.map(e=>new Story(e));
     return 0;// success
   }
   catch(err){
     console.log("Error in adding a story to favoriate", err);
     return -1; //failure
+  }
+}
+
+/** delete a story and update db 
+ * return story deleted if success; null otherwise
+ * note: can only delete story created by currentUser
+*/
+async function removeStoryFromStoryList(storyId){
+  try{
+    let url = `${BASE_URL}/stories/${storyId}`;
+    let data = {token:currentUser.loginToken};
+    let res = await axios({
+      url,
+      method:"DELETE",
+      data,
+    })
+    console.log(res);
+    return res.data.story; // success
+  }
+  catch(err){
+    console.log("Error in adding a story to favoriate", err);
+    return null; //failure
   }
 }
 
